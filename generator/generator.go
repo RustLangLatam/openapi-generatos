@@ -770,7 +770,8 @@ func (g *OpenAPIv3Generator) addPathsToDocumentV3(d *v3.Document, services []*pr
 			comment := g.filterCommentString(method.Comments.Leading)
 			inputMessage := method.Input
 			outputMessage := method.Output
-			operationID := service.GoName + "_" + method.GoName
+			//operationID := service.GoName + "_" + method.GoName
+			operationID := method.GoName
 
 			rules := make([]*annotations.HttpRule, 0)
 

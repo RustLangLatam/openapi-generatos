@@ -10,7 +10,6 @@ require (
 )
 
 require (
-	github.com/golang/protobuf v1.5.4 // indirect
 	github.com/google/gnostic-models v0.6.9 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
