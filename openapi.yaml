@@ -1,0 +1,92 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: MessagingOneOf API
+    version: 0.0.1
+paths:
+    /api/v1/console/users:login:
+        post:
+            tags:
+                - MessagingOneOf
+            operationId: MessagingOneOf_UpdateMessage
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/tests.bodymappying.message.v1.MessageRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/tests.bodymappying.message.v1.MessageResponse'
+                default:
+                    description: Default Api GateWay error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/google.rpc.Status'
+components:
+    schemas:
+        google.protobuf.Any:
+            type: object
+            properties:
+                '@type':
+                    type: string
+                    description: The type of the serialized message.
+            additionalProperties: true
+            description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
+        google.rpc.Status:
+            example: {"message": "the user already has 1 player", "error": "UserAlreadyHasPlayer", "code": "InvalidArgument"}
+            required:
+                - message
+                - code
+                - error
+            type: object
+            properties:
+                code:
+                    type: string
+                    description: The status code, which should be an enum value of MetaXar code errors
+                message:
+                    type: string
+                    description: Human-readable message describing the error.
+                error:
+                    type: string
+                    description: Detailed description of the error.
+            description: Human-readable error response message in response to an invalid request.
+        tests.bodymappying.message.v1.MessageOne:
+            required:
+                - messageId
+                - text
+            type: object
+            properties:
+                messageId:
+                    type: string
+                text:
+                    type: string
+        tests.bodymappying.message.v1.MessageRequest:
+            type: object
+            oneOf:
+                - $ref: '#/components/schemas/tests.bodymappying.message.v1.MessageOne'
+                - $ref: '#/components/schemas/tests.bodymappying.message.v1.MessageTwo'
+        tests.bodymappying.message.v1.MessageResponse:
+            type: object
+            oneOf:
+                - $ref: '#/components/schemas/tests.bodymappying.message.v1.MessageOne'
+                - $ref: '#/components/schemas/tests.bodymappying.message.v1.MessageTwo'
+        tests.bodymappying.message.v1.MessageTwo:
+            required:
+                - messageId
+                - text
+            type: object
+            properties:
+                messageId:
+                    type: string
+                text:
+                    type: string
+tags:
+    - name: MessagingOneOf
