@@ -6,7 +6,7 @@ Protocol Buffer service.
 
 Installation:
 
-    go install github.com/slackve/openapi/cmd/protoc-gen-openapi
+    go install github.com/RustLangLatam/openapi-generatos
 
 Usage:
 
