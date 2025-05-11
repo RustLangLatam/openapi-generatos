@@ -408,6 +408,17 @@ func (g *OpenAPIv3Generator) _buildQueryParamsV3(field *protogen.Field, depths m
 				subParams := g._buildQueryParamsV3(subField, depths)
 				for _, subParam := range subParams {
 					if param, ok := subParam.Oneof.(*v3.ParameterOrReference_Parameter); ok {
+
+						// Merge any `Property` annotations with the current
+						if proto.HasExtension(subField.Desc.Options(), v3.E_Property) {
+							extProperty := proto.GetExtension(subField.Desc.Options(), v3.E_Property)
+							if extProperty != nil {
+								if param, ok := param.Parameter.Schema.Oneof.(*v3.SchemaOrReference_Schema); ok {
+									proto.Merge(param.Schema, extProperty.(*v3.Schema))
+								}
+							}
+						}
+
 						param.Parameter.Name = queryFieldName + "." + param.Parameter.Name
 						parameters = append(parameters, subParam)
 					}
